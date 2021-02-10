@@ -1,0 +1,39 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "noratsm/multi-client",
+            "hostname": "client",
+            "essential": false
+
+        },
+        {
+            "name": "server",
+            "image": "noratsm/multi-server",
+            "hostname": "api",
+            "essential": false
+
+        },
+        {
+            "name": "worker",
+            "image": "noratsm/multi-worker",
+            "essential": false
+
+        },
+        {
+            "name": "nginx",
+            "image": "noratsm/multi-nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPost": 80,
+                    "containerPort": 80
+                } 
+            ],
+            "links": ["client", "server" ]
+
+        }
+
+    ]
+}
